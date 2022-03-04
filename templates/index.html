@@ -1,0 +1,14 @@
+<!doctype html>
+<title>Hello from Flask</title>
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% else %}
+  <h1>Home page</h1>
+  <form action="/map">
+    <input type="submit" value="Go to maps" />
+  </form>
+  <form action="/profile">
+    <input type="submit" value="Go to profile" />
+</form>
+
+{% endif %}
