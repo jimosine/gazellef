@@ -1,5 +1,7 @@
 /* ALL CHANGES HERE OVERRIDE BOOTSTRAP CSS */
-
+* {
+    font-family: Andale Mono, monospace !important;
+}
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     border-color: #e31c79 !important;
     background-color: #e31c79 !important;
