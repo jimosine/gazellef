@@ -1,0 +1,6 @@
+/* ALL CHANGES HERE OVERRIDE BOOTSTRAP CSS */
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    border-color: #e31c79 !important;
+    background-color: #e31c79 !important;
+}
