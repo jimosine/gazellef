@@ -2,7 +2,13 @@
 * {
     font-family: Andale Mono, monospace !important;
 }
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+.btn-primary, .btn-primary:active, .btn-primary:active:focus, .btn-primary:visited {
     border-color: #e31c79 !important;
+    color:#FFFFFF !important;
     background-color: #e31c79 !important;
+    box-shadow: #e31c79 !important;
+}
+
+.btn-primary:hover {
+    background-color: #FABEE0 !important;
 }
