@@ -211,9 +211,6 @@ function displayRoute(origin, destination, service, display) {
     .route({
       origin: origin,
       destination: destination,
-      waypoints: [
-        { location: store_test},
-      ],
       travelMode: google.maps.TravelMode.WALKING,
       avoidTolls: true,
     })
