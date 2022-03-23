@@ -6,11 +6,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- CSS -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <!-- Meta Title -->
-  <title>Homepage</title>
+  <!-- Meta Title and Icon -->
+  <title>Gazelluf Homepage</title>
+  <link rel="icon" type="image/x-icon" href="/../static/images/icon.png">
   <!-- CSS Override -->
   <style>
     /* ALL CHANGES HERE OVERRIDE BOOTSTRAP CSS */
@@ -35,8 +36,8 @@
 </head>
 
 <body>
-  <!-- Use to control width of layout -->
-  <div class="container-fluid" style="padding-left: 0rem;">
+  <!-- Use to control width of layout (removes whitespaces left and right)-->
+  <div class="container-fluid" style="padding-left: 0rem; padding-right: 0rem; overflow: hidden;">
 
     <!-- Header -->
     <div class="row row-cols-1">
@@ -62,31 +63,19 @@
     <!-- Card -->
     <div class="row row-cols-1">
       <div class="col d-flex justify-content-center">
-        <div class="card my-5" style="width: 25rem;">
+        <div class="card my-5" style="width: 20rem;">
           <img src="/../static/images/maps.png" class="img-thumbnail" alt="..." width="400" height="400">
           <div class="card-body" style="background-color:#fabee0">
             <h5 class="card-title">Start Walking!</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <div class="row row-cols-3">
+            <p class="card-text">Click on the button below to start your journey. Choose your supermarket destination
+              and your route preferences.
+            </p>
 
-              <div class="col-6">
-                <!-- Go to Maps -->
-                <a href="direction_scenic" class="btn btn-primary">Go to Maps</a>
-              </div>
-              
-              <div class="col-6">
-                <!-- Choose Supermarket -->
-                <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    Choose Supermarket
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Albert Heijn</a></li>
-                    <li><a class="dropdown-item" href="#">Jumbo</a></li>
-                    <li><a class="dropdown-item" href="#">Hoogvliet</a></li>
-                  </ul>
-                </div>
+            <!-- Go to Maps -->
+            <div class="row row-cols-1">
+              <div class="col">
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">Go to Maps</button>
               </div>
             </div>
           </div>
@@ -94,7 +83,69 @@
       </div>
     </div>
 
+    <!-- Offcanvas -->
+    <div class="offcanvas offcanvas-bottom h-auto" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+      <!-- Offcanvas Header -->
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasBottomLabel">Choose your Preferences!</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <!-- Offcanvas Body -->
+      <div class="offcanvas-body large">
+        <div class="row">
+          <!-- Step 1 -->
+          <div class="col-sm-4">
+            <p style="background-color: #FABEE0; padding: 1rem;">
+              <b>Step 1:</b> Choose your supermarket destination. Here you will pick up your groceries.
+            </p>
+          </div>
+          <!-- Step 2 -->
+          <div class="col-sm-8">
+            <p style="background-color: #FABEE0; padding: 1rem;">
+              <b>Step 2:</b> Choose your route preference. "Generate Route" will generate a personalised route. "Scenic
+              Route" will generate a route that along as many places of interst as possible.
+              </p>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Choose Supermarket Button -->
+          <div class="col-sm-4">
+            <div class="dropdown dropend">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Choose Supermarket
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <button class="dropdown-item" type="button" onclick="showStore(this)">Albert Heijn</button>
+                <button class="dropdown-item" type="button" onclick="showStore(this)">Jumbo</button>
+                <button class="dropdown-item" type="button" onclick="showStore(this)">Hoogvliet</button>
+              </div>
+            </div>
+          </div>
+          <!-- Generate Route Button -->
+          <div class="col-sm-3">
+            <a class="btn btn-primary" href="direction_short" role="button">Generate Route</a>
+          </div>
+          <div class="col-sm-2">
+            <p>
+              <b>OR</b>
+            </p>
+          </div>
+          <div class="col-sm-3">
+            <a class="btn btn-primary" href="direction_scenic" role="button">Scenic Route</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
+
+
+    <!-- Choose Supermarket Dropdown Text Changer -->
+    <script>
+      function showStore(item) {
+        document.getElementById("dropdownMenuButton1").innerHTML = item.innerHTML;
+      }
+    </script>
     <!-- JavaScript Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
