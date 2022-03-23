@@ -6,11 +6,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- CSS -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <!-- Meta Title -->
+  <!-- Meta Title and Icon -->
   <title>My Profile</title>
+  <link rel="icon" type="image/x-icon" href="/../static/images/icon.png">
   <!-- CSS Override -->
   <style>
     /* ALL CHANGES HERE OVERRIDE BOOTSTRAP CSS */
@@ -35,8 +36,8 @@
 </head>
 
 <body>
-  <!-- Use to control width of layout -->
-  <div class="container-fluid" style="padding-left: 0rem;">
+  <!-- Use to control width of layout (removes whitespaces left and right)-->
+  <div class="container-fluid" style="padding-left: 0rem; padding-right: 0rem; overflow: hidden;">
 
     <!-- Header -->
     <div class="row row-cols-1">
@@ -58,21 +59,88 @@
       </div>
     </div>
 
-    <h1>User Profile</h1>
-    Rewards: 0
-    Steps: 0
-    Calories: {{calories}}
-    Weight: {{current_weight}}
+    <div class="row">
+      <!-- Rewards -->
+      <div class="col-sm-3 d-flex justify-content-center">
+        <div class="card my-5 text-center" style="width: 16rem;">
+          <h5 class="card-header"><b>Rewards</b></h5>
+          <img src="/../static/images/discount.svg" class="img-thumbnail" alt="...">
+          <div class="card-body">
+            <p class="card-text">Current Rewards: 0</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Money saved: 0</li>
+              <li class="list-group-item">Rewards last week: 0</li>
+              <li class="list-group-item">Rewards last month: 0</li>
+            </ul>
+            <a href="#" class="btn btn-primary">See your Rewards</a>
+          </div>
+        </div>
+      </div>
 
-    <br><br>
+      <!-- Activity -->
+      <div class="col-sm-3 d-flex justify-content-center">
+        <div class="card my-5 text-center" style="width: 16rem;">
+          <h5 class="card-header"><b>Activity</b></h5>
+          <img src="/../static/images/activity.svg" class="img-thumbnail" alt="...">
+          <div class="card-body">
+            <p class="card-text">Steps today: 0</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Distance walked: 0</li>
+              <li class="list-group-item">Calories burned: 0</li>
+              <li class="list-group-item">Duration walked: 0</li>
+            </ul>
+            <a href="#" class="btn btn-primary">See your Activity History</a>
+          </div>
+        </div>
+      </div>
 
-    <button type="button" style="background-color:#e31c79;border-color:#e31c79" class="btn btn-primary"
-      data-toggle="modal" data-target="#exampleModal" data-whatever="">Link your MyFitnessPal</button>
-    <button type="button" style="background-color:#e31c79;border-color:#e31c79" class="btn btn-primary"
-      data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Link your Mi Fit</button>
-    <button type="button" style="background-color:#e31c79;border-color:#e31c79" class="btn btn-primary"
-      data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Link your Google Fit </button>
+      <!-- Personal -->
+      <div class="col-sm-3 d-flex justify-content-center">
+        <div class="card my-5 text-center" style="width: 16rem;">
+          <h5 class="card-header"><b>Personal</b></h5>
+          <img src="/../static/images/personal.svg" class="img-thumbnail" alt="...">
+          <div class="card-body">
+            <p class="card-text">Jane Doe</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Age: 25</li>
+              <li class="list-group-item">Height: 170 cm</li>
+              <li class="list-group-item">Weight: 65 kg</li>
+            </ul>
+            <a href="#" class="btn btn-primary">See Personal Information</a>
+          </div>
+        </div>
+      </div>
 
+      <!-- Linking -->
+      <div class="col-sm-3 d-flex justify-content-center">
+        <div class="card my-5 text-center" style="width: 16rem;">
+          <h5 class="card-header"><b>Connections</b></h5>
+          <img src="/../static/images/linking.svg" class="img-thumbnail" alt="...">
+          <div class="card-body">
+            <p class="card-text">Connect to your accounts to unlock health related integrations.</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <button type="button" style="background-color:#e31c79;border-color:#e31c79" class="btn btn-primary"
+                  data-toggle="modal" data-target="#exampleModal" data-whatever="">Link your
+                  MyFitnessPal</button>
+              </li>
+              <li class="list-group-item">
+                <button type="button" style="background-color:#e31c79;border-color:#e31c79" class="btn btn-primary"
+                  data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Link your
+                  Mi Fit</button>
+              </li>
+              <li class="list-group-item">
+                <button type="button" style="background-color:#e31c79;border-color:#e31c79" class="btn btn-primary"
+                  data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Link your Google Fit
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Dialogues -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
