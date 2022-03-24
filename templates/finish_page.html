@@ -65,25 +65,23 @@
         <div class="card" style="width: auto; margin: 1rem;">
           <div class="card-body">
             <h5 class="card-title">Congratulations! You arrived at your Destination</h5>
-            <h6 class="card-subtitle mb-2 text-muted">You walked from Science Park to Albert Heijn Diemen </h6>
             <p class="card-text">
 
-              You walked a distance of <b><span id="total_distance"></span></b> 
+              You walked a distance of <b><span id="total_distance"></span> km!</b> 
             <p class="card-text">
-              You walked <b>ww</b> minutes!
+              You walked <b><span id="minutes"></b> minutes!
             </p>
             <p class="card-text">
-              You burned <b></b> calories!
+              You burned <b><span id="calories"></b> calories!
             </p>
             <p class="card-text">
-              You visited <b>yy</b> hotspots!
+              You visited <b>{{hotspots}}</b> hotspots!
             </p>
             <p class="card-text">
-              You received <b>zz</b> points!
+              You received <b><span id="points"></b> points!
             </p>
-
             <p>
-              <form action="" method="POST" ><button class="btn btn-danger" type="submit" name="save" value="2.42"><span class="glyphicon glyphicon-trash"></span> SAVE</button> </form>
+              <form action="" method="POST" ><button class="btn btn-danger" type="submit" name="save" id="Save" value=""><span class="glyphicon glyphicon-trash"></span> SAVE</button> </form>
             </p>
           </div>
         </div>
@@ -107,9 +105,28 @@
       crossorigin="anonymous"></script>
 
     <script type="text/javascript">
+      const hotspots = {{hotspots}};
       var total = sessionStorage.getItem("total_distance");
+      var total = Number(total);
+      var total = total.toFixed(2);
       console.log(total);
       document.getElementById("total_distance").innerHTML = total;
+      document.getElementById("minutes").innerHTML = (total / (5.1 / 60)).toFixed(2);
+      document.getElementById("calories").innerHTML = (total * 76).toFixed(2);
+      var minutes = Number(total / (5.1 / 60));
+      console.log(minutes);
+      var calories = Number(total * 76);
+      console.log(calories);
+      var points = (100 + 50) * total;
+      console.log(points);
+      document.getElementById("points").innerHTML = points.toFixed();
+
+      sessionStorage.setItem("points", points);
+      sessionStorage.setItem("calories", calories);
+      sessionStorage.setItem("duration", minutes);
+      var dict1 = {name:"val", name2:"val"};
+      document.getElementById("Save").value = [points,total,calories]; 
+
     </script>
 </body>
 
