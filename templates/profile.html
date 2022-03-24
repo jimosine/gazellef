@@ -27,6 +27,7 @@
       color: #FFFFFF !important;
       background-color: #e31c79 !important;
       box-shadow: #e31c79 !important;
+      border: 1px solid white !important;
     }
 
     .btn-primary:hover {
@@ -59,72 +60,75 @@
       </div>
     </div>
 
-{% if new_stats is defined %}
+    {% if new_stats is defined %}
     <div class="row">
       <!-- Rewards -->
       <div class="col-sm-3 d-flex justify-content-center">
-        <div class="card my-5 text-center" style="width: 16rem;">
+        <div class="card my-5 text-center" style="width: 20rem;">
           <h5 class="card-header"><b>Rewards</b></h5>
           <img src="/../static/images/discount.svg" class="img-thumbnail" alt="...">
           <div class="card-body">
-              
-                <p class="card-text">Total Points: {{points}}</p>
-            
             <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p class="card-text"><b>Total Points: {{points}}</b></p>
+              </li>
               <li class="list-group-item">Current rewards: {{points}}</li>
               <li class="list-group-item">Rewards last week: {{points}}</li>
               <li class="list-group-item">Rewards last month: {{points}}</li>
+              <li class="list-group-item"><a href="#" class="btn btn-primary">See your Rewards</a></li>
             </ul>
-            <a href="#" class="btn btn-primary">See your Rewards</a>
           </div>
         </div>
       </div>
 
       <!-- Activity -->
       <div class="col-sm-3 d-flex justify-content-center">
-        <div class="card my-5 text-center" style="width: 16rem;">
+        <div class="card my-5 text-center" style="width: 20rem;">
           <h5 class="card-header"><b>Activity</b></h5>
           <img src="/../static/images/activity.svg" class="img-thumbnail" alt="...">
           <div class="card-body">
-            <p class="card-text">Steps today: {{steps}}</p>
             <ul class="list-group list-group-flush">
-                Distance walked: {{ distance }} km.
-
-                <li class="list-group-item">Distance walked: {{distance}} km.</li>
-              
+              <li class="list-group-item">
+                <p class="card-text"><b>Steps today: {{steps}}</b></p>
+              </li>
+              <li class="list-group-item">Distance walked: {{distance}} km.</li>
               <li class="list-group-item">Calories burned: {{calories_burned}} calories</li>
               <li class="list-group-item">Duration walked: {{duration}} minutes</li>
+              <li class="list-group-item"><a href="#" class="btn btn-primary">See your Activity History</a></li>
             </ul>
-            <a href="#" class="btn btn-primary">See your Activity History</a>
           </div>
         </div>
       </div>
 
       <!-- Personal -->
       <div class="col-sm-3 d-flex justify-content-center">
-        <div class="card my-5 text-center" style="width: 16rem;">
+        <div class="card my-5 text-center" style="width: 20rem;">
           <h5 class="card-header"><b>Personal</b></h5>
           <img src="/../static/images/personal.svg" class="img-thumbnail" alt="...">
           <div class="card-body">
-            <p class="card-text">Jane Doe</p>
             <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p class="card-text"><b>Jane Doe</b></p>
+              </li>
               <li class="list-group-item">Age: 25</li>
               <li class="list-group-item">Height: 170 cm</li>
               <li class="list-group-item">Weight: {{current_weight}} kg</li>
+              <li class="list-group-item"><a href="#" class="btn btn-primary">See Personal Information</a></li>
             </ul>
-            <a href="#" class="btn btn-primary">See Personal Information</a>
           </div>
         </div>
       </div>
 
       <!-- Linking -->
       <div class="col-sm-3 d-flex justify-content-center">
-        <div class="card my-5 text-center" style="width: 16rem;">
+        <div class="card my-5 text-center" style="width: 20rem;">
           <h5 class="card-header"><b>Connections</b></h5>
           <img src="/../static/images/linking.svg" class="img-thumbnail" alt="...">
           <div class="card-body">
-            <p class="card-text">Connect to your accounts to unlock health related integrations.</p>
             <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p class="card-text"><b>Connect to your accounts to unlock health related integrations.</b></p>
+              </li>
               <li class="list-group-item">
                 <button type="button" style="background-color:#e31c79;border-color:#e31c79" class="btn btn-primary"
                   data-toggle="modal" data-target="#exampleModal" data-whatever="">Link your
@@ -145,72 +149,75 @@
         </div>
       </div>
     </div>
-    {% else %} 
-        <div class="row">
+    {% else %}
+    <div class="row">
       <!-- Rewards -->
       <div class="col-sm-3 d-flex justify-content-center">
-        <div class="card my-5 text-center" style="width: 16rem;">
+        <div class="card my-5 text-center" style="width: 20rem;">
           <h5 class="card-header"><b>Rewards</b></h5>
           <img src="/../static/images/discount.svg" class="img-thumbnail" alt="...">
           <div class="card-body">
-              
-                <p class="card-text">Total Points: 0</p>
-            
             <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p class="card-text"><b>Total Points: 0</b></p>
+              </li>
               <li class="list-group-item">Current rewards: 0</li>
               <li class="list-group-item">Rewards last week: 0</li>
               <li class="list-group-item">Rewards last month: 0</li>
+              <li class="list-group-item"><a href="#" class="btn btn-primary">See your Rewards</a></li>
             </ul>
-            <a href="#" class="btn btn-primary">See your Rewards</a>
           </div>
         </div>
       </div>
 
       <!-- Activity -->
       <div class="col-sm-3 d-flex justify-content-center">
-        <div class="card my-5 text-center" style="width: 16rem;">
+        <div class="card my-5 text-center" style="width: 20rem;">
           <h5 class="card-header"><b>Activity</b></h5>
           <img src="/../static/images/activity.svg" class="img-thumbnail" alt="...">
           <div class="card-body">
-            <p class="card-text">Steps today: 0</p>
             <ul class="list-group list-group-flush">
-                Distance walked: 0 km.
-
-                <li class="list-group-item">Distance walked: 0 km.</li>
-              
+              <li class="list-group-item">
+                <p class="card-text"><b>Steps today: 0</b></p>
+              </li>
+              <li class="list-group-item">Distance walked: 0 km.</li>
               <li class="list-group-item">Calories burned: 0 calories</li>
               <li class="list-group-item">Duration walked: 0 minutes</li>
+              <li class="list-group-item"><a href="#" class="btn btn-primary">See your Activity History</a></li>
             </ul>
-            <a href="#" class="btn btn-primary">See your Activity History</a>
           </div>
         </div>
       </div>
 
       <!-- Personal -->
       <div class="col-sm-3 d-flex justify-content-center">
-        <div class="card my-5 text-center" style="width: 16rem;">
+        <div class="card my-5 text-center" style="width: 20rem;">
           <h5 class="card-header"><b>Personal</b></h5>
           <img src="/../static/images/personal.svg" class="img-thumbnail" alt="...">
           <div class="card-body">
-            <p class="card-text">Jane Doe</p>
             <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p class="card-text"><b>Jane Doe</b></p>
+              </li>
               <li class="list-group-item">Age: 25</li>
               <li class="list-group-item">Height: 170 cm</li>
               <li class="list-group-item">Weight: {{current_weight}} kg</li>
+              <li class="list-group-item"><a href="#" class="btn btn-primary">See Personal Information</a></li>
             </ul>
-            <a href="#" class="btn btn-primary">See Personal Information</a>
           </div>
         </div>
       </div>
 
       <!-- Linking -->
       <div class="col-sm-3 d-flex justify-content-center">
-        <div class="card my-5 text-center" style="width: 16rem;">
+        <div class="card my-5 text-center" style="width: 20rem;">
           <h5 class="card-header"><b>Connections</b></h5>
           <img src="/../static/images/linking.svg" class="img-thumbnail" alt="...">
           <div class="card-body">
-            <p class="card-text">Connect to your accounts to unlock health related integrations.</p>
             <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p class="card-text"><b>Connect to your accounts to unlock health related integrations.</b></p>
+              </li>
               <li class="list-group-item">
                 <button type="button" style="background-color:#e31c79;border-color:#e31c79" class="btn btn-primary"
                   data-toggle="modal" data-target="#exampleModal" data-whatever="">Link your
@@ -233,35 +240,33 @@
     </div>
   </div>
   {% endif %}
-  
 
-    <!-- Modal Dialogues -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form method="POST">
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
+  <!-- Modal Dialogues -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
     </div>
