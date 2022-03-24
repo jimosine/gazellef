@@ -27,6 +27,7 @@
       color: #FFFFFF !important;
       background-color: #e31c79 !important;
       box-shadow: #e31c79 !important;
+      border: 1px solid white !important;
     }
 
     .btn-primary:hover {
@@ -62,72 +63,77 @@
     <!-- Confirmation Text -->
     <div class="row row-cols-1">
       <div class="col d-flex justify-content-center">
-        <div class="card" style="width: auto; margin: 1rem;">
+        <div class="card" style="width: auto; height: auto; margin: 5rem;">
           <div class="card-body">
-            <h5 class="card-title">Congratulations! You arrived at your Destination</h5>
-            <p class="card-text">
-
-              You walked a distance of <b><span id="total_distance"></span> km!</b> 
-            <p class="card-text">
-              You walked <b><span id="minutes"></b> minutes!
-            </p>
-            <p class="card-text">
-              You burned <b><span id="calories"></b> calories!
-            </p>
-            <p class="card-text">
-              You visited <b>{{hotspots}}</b> hotspots!
-            </p>
-            <p class="card-text">
-              You received <b><span id="points"></b> points!
-            </p>
-            <p>
-              <form action="" method="POST" ><button class="btn btn-danger" type="submit" name="save" id="Save" value=""><span class="glyphicon glyphicon-trash"></span> SAVE</button> </form>
+            <h3 style="margin: 2rem;" class="card-title">&#127881; Congratulations! You arrived at your Destination</h3>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <p class="card-text">
+                  &#128694; You walked a distance of <b><span id="total_distance"></span></b> km!
+              </li>
+              <li class="list-group-item">
+                <p class="card-text">
+                  &#9201; You walked <b><span id="minutes"></b> minutes!
+                </p>
+              </li>
+              <li class="list-group-item">
+                <p class="card-text">
+                  &#128201; You burned <b><span id="calories"></b> calories!
+                </p>
+              </li>
+              <li class="list-group-item">
+                <p class="card-text">
+                  &#128205; You visited <b>{{hotspots}}</b> hotspots!
+                </p>
+              </li>
+              <li class="list-group-item">
+                <p class="card-text">
+                  &#127941; You received <b><span id="points"></b> points!
+                </p>
+              </li>
+            </ul>
+            <p style="margin: 2rem;">
+            <form action="" method="POST">
+              <button class="btn btn-primary" type="submit" name="save" id="Save" value="">
+                Confirm and Add to Profile
+              </button>
+            </form>
             </p>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Continuation Buttons -->
-    <div class="row row-cols-1">
-      <div class="col d-flex justify-content-center">
-        <a href="index" class="btn btn-primary" style="margin: 1rem;">Walk Another Route</a>
-        <a href="profile" class="btn btn-primary" style="margin: 1rem;">Go to your Profile</a>
-      </div>
-    </div>
+  <!-- JavaScript Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
 
+  <script type="text/javascript">
+    const hotspots = {{ hotspots }};
+    var total = sessionStorage.getItem("total_distance");
+    var total = Number(total);
+    var total = total.toFixed(2);
+    console.log(total);
+    document.getElementById("total_distance").innerHTML = total;
+    document.getElementById("minutes").innerHTML = (total / (5.1 / 60)).toFixed(2);
+    document.getElementById("calories").innerHTML = (total * 76).toFixed(2);
+    var minutes = Number(total / (5.1 / 60));
+    console.log(minutes);
+    var calories = Number(total * 76);
+    console.log(calories);
+    var points = (100 + 50) * total;
+    console.log(points);
+    document.getElementById("points").innerHTML = points.toFixed();
 
+    sessionStorage.setItem("points", points);
+    sessionStorage.setItem("calories", calories);
+    sessionStorage.setItem("duration", minutes);
+    var dict1 = { name: "val", name2: "val" };
+    document.getElementById("Save").value = [points, total, calories];
 
-
-    <!-- JavaScript Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-      const hotspots = {{hotspots}};
-      var total = sessionStorage.getItem("total_distance");
-      var total = Number(total);
-      var total = total.toFixed(2);
-      console.log(total);
-      document.getElementById("total_distance").innerHTML = total;
-      document.getElementById("minutes").innerHTML = (total / (5.1 / 60)).toFixed(2);
-      document.getElementById("calories").innerHTML = (total * 76).toFixed(2);
-      var minutes = Number(total / (5.1 / 60));
-      console.log(minutes);
-      var calories = Number(total * 76);
-      console.log(calories);
-      var points = (100 + 50) * total;
-      console.log(points);
-      document.getElementById("points").innerHTML = points.toFixed();
-
-      sessionStorage.setItem("points", points);
-      sessionStorage.setItem("calories", calories);
-      sessionStorage.setItem("duration", minutes);
-      var dict1 = {name:"val", name2:"val"};
-      document.getElementById("Save").value = [points,total,calories]; 
-
-    </script>
+  </script>
 </body>
 
 </html>
