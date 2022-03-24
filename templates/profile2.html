@@ -85,12 +85,7 @@
           <div class="card-body">
             <p class="card-text">Steps today: 0</p>
             <ul class="list-group list-group-flush">
-              {% if new_stats is defined %}
-                Distance walked: {{ new_stats }}
-              {% else %}
-                <li class="list-group-item">Distance walked: {{session['distance']}}</li>
-              {% endif %}
-              
+              <li class="list-group-item">Distance walked: 0</li>
               <li class="list-group-item">Calories burned: {{calories}}</li>
               <li class="list-group-item">Duration walked: 0</li>
             </ul>

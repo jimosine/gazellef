@@ -63,17 +63,16 @@
     <!-- Map -->
     <div class="row row-cols-1">
       <div class="col">
-        <div id="map" style="width:100%; height:670px; border: 1px solid">
+        <div id="map" style="width:100%; height:400px; border: 1px solid">
         </div>
       </div>
     </div>
 
     <!-- Buttons Below -->
-    <!-- End Route -->
     <div class="row row-cols-1">
-      <div class="col d-flex justify-content-center" style="background-color: #e31c79;">
-        <a href="confirmation" class="btn btn-primary">Stop Walking and Confirm Pickup</a>
-          <p>Total Distance: <span id="total"></span></p>
+      <div class="col">
+        <button type="button" class="btn btn-primary btn-lg">Start</button>
+                <p>Total Distance: <span id="total"></span></p>
       </div>
     </div>
 
@@ -83,28 +82,35 @@
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
 let map, InfoWindow;
-
-
-const waypts = []
-      {% for hotspot in hotspots %}
-      waypts.push({ location: { lat: {{hotspot['lat']}}, lng: {{hotspot['lng']}} }})
-      {% endfor %}
-
-
-
- navigator.geolocation.getCurrentPosition(function(position) {  
-  window.gps = (position.coords.latitude+position.coords.longitude);  
-});
-
+const store_test = { lat: {{lat}}, lng: {{lng}} }
 function initMap() {
   const store_loc = { lat: {{lat}}, lng: {{lng}} };
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 52.356, lng: 4.953 },
     zoom: 17,
   });
+  const directionsService = new google.maps.DirectionsService();
+  const directionsRenderer = new google.maps.DirectionsRenderer({
+    draggable: true,
+    map,
+    panel: document.getElementById("panel"),
+  });
+
+  directionsRenderer.addListener("directions_changed", () => {
+  const directions = directionsRenderer.getDirections();
+
+  if (directions) {
+    computeTotalDistance(directions);
+    }
+  });
 
 
-  
+  displayRoute(
+    { lat: 52.3534, lng: 4.9538 },
+    { lat: 52.3834, lng: 4.9520 },
+    directionsService,
+    directionsRenderer
+  );
 
   const contentString =
       '<div id="content">' +
@@ -188,7 +194,7 @@ const store_loc2 = { lat: 52.3534, lng: 4.9538 };
 
   if (navigator.geolocation) {
      navigator.geolocation.getCurrentPosition(function (position) {
-         const initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
          map.setCenter(initialLocation);
 
     const marker3 = new google.maps.Marker({
@@ -196,29 +202,6 @@ const store_loc2 = { lat: 52.3534, lng: 4.9538 };
     icon: svgMarker,
     map: map,
     });
-
-const directionsService = new google.maps.DirectionsService();
-  const directionsRenderer = new google.maps.DirectionsRenderer({
-    draggable: true,
-    map,
-    panel: document.getElementById("panel"),
-  });
-
-  directionsRenderer.addListener("directions_changed", () => {
-  const directions = directionsRenderer.getDirections();
-
-  if (directions) {
-    computeTotalDistance(directions);
-    }
-  });
-
-  displayRoute(
-    initialLocation,
-    { lat: {{store_list['lat']}}, lng: {{store_list['lng']}} },
-    directionsService,
-    directionsRenderer
-  );
-
      });
 
  }
@@ -253,7 +236,6 @@ function computeTotalDistance(result) {
 
   total = total / 1000;
   document.getElementById("total").innerHTML = total + " km";
-  
 }
 
 
