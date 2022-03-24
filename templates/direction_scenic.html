@@ -27,6 +27,7 @@
       color: #FFFFFF !important;
       background-color: #e31c79 !important;
       box-shadow: #e31c79 !important;
+      border: 1px solid white !important;
     }
 
     .btn-primary:hover {
@@ -62,200 +63,206 @@
     <!-- Map -->
     <div class="row row-cols-1">
       <div class="col">
-        <div id="map" style="width:100%; height:675px; border: 1px solid">
+        <div id="map" style="width:100%; height:100%; border: 1px solid">
         </div>
+      </div>
+    </div>
+
+    <!-- Total Distance -->
+    <div class="row row-cols-1">
+      <div class="col d-flex justify-content-center" style="background-color: #e31c79;">
+        <p style="color: white;">Total Distance: <span style="color: white;" id="total"></span></p>
       </div>
     </div>
 
     <!-- End Route -->
     <div class="row row-cols-1">
       <div class="col d-flex justify-content-center" style="background-color: #e31c79;">
-        <a href="finish_page" class="btn btn-primary">Stop Walking and Confirm Pickup</a>
-          <p>Total Distance: <span id="total"></span></p>
+        <a href="confirmation" class="btn btn-primary">Stop Walking and Confirm Pickup</a>
       </div>
     </div>
-  </div>
 
-<script>
+    <script>
 
-   // Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
-let map, InfoWindow;
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      let map, InfoWindow;
 
 
-const waypts = []
+      const waypts = []
       {% for hotspot in hotspots %}
-      waypts.push({ location: { lat: {{hotspot['lat']}}, lng: {{hotspot['lng']}} }})
+      waypts.push({ location: { lat: {{ hotspot['lat']}}, lng: {{ hotspot['lng']}} }})
       {% endfor %}
 
 
 
- navigator.geolocation.getCurrentPosition(function(position) {  
-  window.gps = (position.coords.latitude+position.coords.longitude);  
-});
+      navigator.geolocation.getCurrentPosition(function (position) {
+        window.gps = (position.coords.latitude + position.coords.longitude);
+      });
 
-function initMap() {
-  const store_loc = { lat: {{lat}}, lng: {{lng}} };
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 52.356, lng: 4.953 },
-    zoom: 17,
-  });
+      function initMap() {
+        const store_loc = { lat: {{ lat }
+      }, lng: { { lng } } };
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 52.356, lng: 4.953 },
+        zoom: 17,
+      });
 
 
-  
 
-  const contentString =
-      '<div id="content">' +
-      '<div id="siteNotice">' +
-      "</div>" +
-      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
-      '<div id="bodyContent">' +
-      "<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large " +
-      "sandstone rock formation in the southern part of the " +
-      "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
-      "south west of the nearest large town, Alice Springs; 450&#160;km " +
-      "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
-      "features of the Uluru - Kata Tjuta National Park. Uluru is " +
-      "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
-      "Aboriginal people of the area. It has many springs, waterholes, " +
-      "rock caves and ancient paintings. Uluru is listed as a World " +
-      "Heritage Site.</p>" +
-      "{{content_string}}" + 
-      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-      "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
-      "(last visited June 22, 2009).</p>" +
-      "</div>" +
-      "</div>";
-  const infowindow = new google.maps.InfoWindow({
-    content: contentString,
-  });
 
-  const image =
-    "static/icon.png";
+      const contentString =
+        '<div id="content">' +
+        '<div id="siteNotice">' +
+        "</div>" +
+        '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+        '<div id="bodyContent">' +
+        "<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large " +
+        "sandstone rock formation in the southern part of the " +
+        "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
+        "south west of the nearest large town, Alice Springs; 450&#160;km " +
+        "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
+        "features of the Uluru - Kata Tjuta National Park. Uluru is " +
+        "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
+        "Aboriginal people of the area. It has many springs, waterholes, " +
+        "rock caves and ancient paintings. Uluru is listed as a World " +
+        "Heritage Site.</p>" +
+        "{{content_string}}" +
+        '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+        "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
+        "(last visited June 22, 2009).</p>" +
+        "</div>" +
+        "</div>";
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
 
-    const svgMarker = {
-    path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
-    fillColor: "blue",
-    fillOpacity: 0.6,
-    strokeWeight: 0,
-    rotation: 0,
-    scale: 2,
-    anchor: new google.maps.Point(15, 30),
-  };
+      const image =
+        "static/icon.png";
+
+      const svgMarker = {
+        path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+        fillColor: "blue",
+        fillOpacity: 0.6,
+        strokeWeight: 0,
+        rotation: 0,
+        scale: 2,
+        anchor: new google.maps.Point(15, 30),
+      };
 
 
       const svgMarker2 = {
-    path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
-    fillColor: "black",
-    fillOpacity: 0.6,
-    strokeWeight: 0,
-    rotation: 0,
-    scale: 2,
-    anchor: new google.maps.Point(15, 30),
-  };
+        path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+        fillColor: "black",
+        fillOpacity: 0.6,
+        strokeWeight: 0,
+        rotation: 0,
+        scale: 2,
+        anchor: new google.maps.Point(15, 30),
+      };
 
 
-    // The marker, positioned at Uluru
-  const marker = new google.maps.Marker({
-    position: { lat: 52.3834, lng: 4.9520 },
-    icon: image,
-    map: map,
-    title: "Uluru (Ayers Rock)",
-    });
+      // The marker, positioned at Uluru
+      const marker = new google.maps.Marker({
+        position: { lat: 52.3834, lng: 4.9520 },
+        icon: image,
+        map: map,
+        title: "Uluru (Ayers Rock)",
+      });
 
 
 
 
-const store_loc2 = { lat: 52.3534, lng: 4.9538 };
+      const store_loc2 = { lat: 52.3534, lng: 4.9538 };
 
-    const marker2= new google.maps.Marker({
-    position: store_loc2,
-    icon: svgMarker2,
-    map: map,
-    title: "Uluru (Ayers Rock)",
-    });
+      const marker2 = new google.maps.Marker({
+        position: store_loc2,
+        icon: svgMarker2,
+        map: map,
+        title: "Uluru (Ayers Rock)",
+      });
 
-  marker.addListener("click", () => {
-    infowindow.open({
-      anchor: marker,
-      map,
-      shouldFocus: true,
-    });
-  });
+      marker.addListener("click", () => {
+        infowindow.open({
+          anchor: marker,
+          map,
+          shouldFocus: true,
+        });
+      });
 
 
-  if (navigator.geolocation) {
-     navigator.geolocation.getCurrentPosition(function (position) {
-         const initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-         map.setCenter(initialLocation);
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          map.setCenter(initialLocation);
 
-    const marker3 = new google.maps.Marker({
-    position: initialLocation,
-    icon: svgMarker,
-    map: map,
-    });
+          const marker3 = new google.maps.Marker({
+            position: initialLocation,
+            icon: svgMarker,
+            map: map,
+          });
 
-const directionsService = new google.maps.DirectionsService();
-  const directionsRenderer = new google.maps.DirectionsRenderer({
-    draggable: true,
-    map,
-    panel: document.getElementById("panel"),
-  });
+          const directionsService = new google.maps.DirectionsService();
+          const directionsRenderer = new google.maps.DirectionsRenderer({
+            draggable: true,
+            map,
+            panel: document.getElementById("panel"),
+          });
 
-  directionsRenderer.addListener("directions_changed", () => {
-  const directions = directionsRenderer.getDirections();
+          directionsRenderer.addListener("directions_changed", () => {
+            const directions = directionsRenderer.getDirections();
 
-  if (directions) {
-    computeTotalDistance(directions);
-    }
-  });
+            if (directions) {
+              computeTotalDistance(directions);
+            }
+          });
 
-  displayRoute(
-    initialLocation,
-    { lat: {{store_list['lat']}}, lng: {{store_list['lng']}} },
-    directionsService,
-    directionsRenderer
+          displayRoute(
+            initialLocation,
+            { lat: {{ store_list['lat']}}, lng: {{ store_list['lng']}} },
+      directionsService,
+        directionsRenderer
   );
 
      });
 
  }
 }
-function displayRoute(origin, destination, service, display) {
-  service
-    .route({
-      origin: origin,
-      destination: destination,
-      waypoints: waypts,
-      travelMode: google.maps.TravelMode.WALKING,
-      avoidTolls: true,
-    })
-    .then((result) => {
-      display.setDirections(result);
-    })
-    .catch((e) => {
-      alert("Could not display directions due to: " + e);
-    });
-}
+      function displayRoute(origin, destination, service, display) {
+        service
+          .route({
+            origin: origin,
+            destination: destination,
+            waypoints: waypts,
+            travelMode: google.maps.TravelMode.WALKING,
+            avoidTolls: true,
+          })
+          .then((result) => {
+            display.setDirections(result);
+          })
+          .catch((e) => {
+            alert("Could not display directions due to: " + e);
+          });
+      }
 
-function computeTotalDistance(result) {
-  let total = 0;
-  const myroute = result.routes[0];
+      function computeTotalDistance(result) {
+        let total = 0;
+        const myroute = result.routes[0];
 
-  if (!myroute) {
-    return;
-  }
+        if (!myroute) {
+          return;
+        }
 
-  for (let i = 0; i < myroute.legs.length; i++) {
-    total += myroute.legs[i].distance.value;
-  }
+        for (let i = 0; i < myroute.legs.length; i++) {
+          total += myroute.legs[i].distance.value;
+        }
 
-  total = total / 1000;
-  document.getElementById("total").innerHTML = total + " km";
-  sessionStorage.setItem("total_distance", total);
-}
+        total = total / 1000;
+        document.getElementById("total").innerHTML = total + " km";
+        sessionStorage.setItem("total_distance", total);
+      }
 
 
 
@@ -267,7 +274,7 @@ function computeTotalDistance(result) {
 
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHG7AVevT8cxCKj4jaX_VWn2lds456NGc&callback=initMap"
-    async defer></script>
+      async defer></script>
 </body>
 
 </html>
