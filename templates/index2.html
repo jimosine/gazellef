@@ -117,17 +117,10 @@
                 Choose Supermarket
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-<form method="post">
-  <label for="storelist">Choose a store:</label>
-  <select id="storelist" name="storelist">
-      {% for store in stores %}
-          <option value="{{ store }}" >{{ store['name'] }}</option>
-      {% endfor %}
-
-
-  </select>
-  <input type="submit">
-</form>
+                
+                <button class="dropdown-item" type="button" onclick="showStore(this)">Albert Heijn</button>
+                <button class="dropdown-item" type="button" onclick="showStore(this)">Jumbo</button>
+                <button class="dropdown-item" type="button" onclick="showStore(this)">Hoogvliet</button>
               </div>
             </div>
           </div>
